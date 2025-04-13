@@ -21,3 +21,18 @@ title: Vue.js Directives & Event Binding Cheat Sheet
 | Lazy input update        | `v-model.lazy`          | `<input v-model.lazy="msg" />`                                 |
 | Trim input               | `v-model.trim`          | `<input v-model.trim="name" />`                                |
 | Convert to number        | `v-model.number`        | `<input v-model.number="age" />`                               |
+
+
+# 📦 Vue.js Components & Props
+
+| **Feature**               | **Syntax**                          | **Example**                                                                 |
+|---------------------------|-------------------------------------|------------------------------------------------------------------------------|
+| Register component        | `app.component('MyComp', {...})`    | `app.component('MyBtn', { template: '<button>Click</button>' })`            |
+| Use component             | `<ComponentName />`                 | `<MyBtn />`                                                                 |
+| Props in child            | `props: ['title']`                  | `props: ['label']` inside child                                             |
+| Pass props from parent    | `:propName="value"`                 | `<Child :title="parentTitle" />`                                           |
+| Emit event from child     | `this.$emit('eventName')`           | `this.$emit('submit')` inside child                                        |
+| Listen to event in parent | `@eventName`                        | `<Child @submit="handleSubmit" />`                                         |
+| Slot (default)            | `<slot></slot>`                     | `<Child><p>Content</p></Child>`                                            |
+| Named slot                | `<slot name="header"></slot>`       | `<template v-slot:header><h1>Hi</h1></template>`                            |
+| Scoped slot               | `<slot :data="value" />`            | `<template v-slot="{ data }">{{ data }}</template>`                         |
