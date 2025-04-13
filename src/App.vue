@@ -1,6 +1,8 @@
 <script setup>
 import {ref} from "vue";
 
+// <!-- state section -->
+
 // Create a reactive reference variable named 'helloworld' initialized as an empty string
 const helloworld = ref('');
 
@@ -10,6 +12,9 @@ helloworld.value = 'Hello World.';
 // Create a reactive boolean reference variable named 'visiable' initialized as true
 const visiable = ref(true);
 
+
+
+// <!-- If else part  -->
 // Create a reactive status variable with initial value 'active'
 const status = ref('active');
 
@@ -40,6 +45,10 @@ function toggleStatus() {
     <!-- Alternative heading with red text -->
     <h1 class="text-red-500">Hello world from not visible</h1>
   </div>
+
+
+
+  // <!-- If else part   -->
   <div>
     <!-- Button that triggers the toggleStatus method when clicked -->
     <button @click="toggleStatus">Toggle Status</button>
