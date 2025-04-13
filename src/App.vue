@@ -22,7 +22,8 @@ import {
 
 // First component state
 const message = ref('Initial Message'); // message displayed in header
-const count = ref(0); // increments every second
+const count = ref(0); // counter value that can be incremented/decremented
+const lastUpdated = ref(null); // timestamp of last update
 
 // Second component state
 const helloworld = ref('Hello World.'); // static message
@@ -70,16 +71,8 @@ onBeforeMount(() => {
 
 onMounted(() => {
   console.log('onMounted - DOM is ready');
-
-  // Start interval to increase count every second
-  const timer = setInterval(() => {
-    count.value++;
-  }, 1000);
-
-  // Clean up interval before unmount
-  onBeforeUnmount(() => {
-    clearInterval(timer);
-  });
+  // Set initial timestamp
+  lastUpdated.value = new Date().toLocaleTimeString();
 });
 
 
@@ -100,6 +93,10 @@ onUpdated(() => {
 // LIFECYCLE HOOKS - UNMOUNTING
 // ===================
 
+onBeforeUnmount(() => {
+  console.log('onBeforeUnmount - component will be destroyed');
+});
+
 onUnmounted(() => {
   console.log('onUnmounted - component is destroyed');
 });
@@ -111,6 +108,22 @@ onUnmounted(() => {
 
 function updateMessage() {
   message.value = 'Updated Message at ' + new Date().toLocaleTimeString();
+  lastUpdated.value = new Date().toLocaleTimeString();
+}
+
+function incrementCount() {
+  count.value++;
+  lastUpdated.value = new Date().toLocaleTimeString();
+}
+
+function decrementCount() {
+  count.value--;
+  lastUpdated.value = new Date().toLocaleTimeString();
+}
+
+function resetCount() {
+  count.value = 0;
+  lastUpdated.value = new Date().toLocaleTimeString();
 }
 
 function toggleStatus() {
@@ -192,7 +205,41 @@ provide('appName', 'Vue Demo App');
       >
         Update Message
       </button>
-      <div class="mt-4 text-lg font-semibold text-gray-600">Count: {{ count }}</div>
+
+      <!-- Counter with manual controls instead of automatic increment -->
+      <div class="mt-6 bg-white p-4 rounded-md shadow-sm">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold text-gray-700">Counter:</h3>
+          <div class="text-sm text-gray-500">Last updated: {{ lastUpdated }}</div>
+        </div>
+
+        <div class="flex items-center justify-center mt-4 gap-4">
+          <button
+              @click="decrementCount"
+              class="bg-red-500 hover:bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition duration-200"
+          >
+            -
+          </button>
+
+          <div class="text-3xl font-bold text-gray-800 w-16 text-center">
+            {{ count }}
+          </div>
+
+          <button
+              @click="incrementCount"
+              class="bg-green-500 hover:bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition duration-200"
+          >
+            +
+          </button>
+        </div>
+
+        <button
+            @click="resetCount"
+            class="mt-4 w-full bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded-md font-medium text-sm transition duration-200"
+        >
+          Reset
+        </button>
+      </div>
     </section>
 
     <!-- ===================
