@@ -1,4 +1,7 @@
 <script setup>
+//importing another component
+import Practice from "./components/practice/index.vue"
+
 // Importing Composition API functions from Vue
 import {
   ref,
@@ -454,6 +457,14 @@ provide('appName', 'Vue Demo App');
           </div>
         </li>
       </ul>
+    </section>
+
+
+<!--  practice component section    -->
+    <!-- New component section -->
+    <section class="mb-8 bg-gray-50 p-6 rounded-lg shadow-sm">
+      <h2 class="text-xl font-bold text-gray-700 mb-4">Practice Component</h2>
+      <Practice />
     </section>
   </div>
 </template>
