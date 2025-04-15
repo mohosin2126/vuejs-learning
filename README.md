@@ -646,6 +646,61 @@ const submitForm = async () => {
 </template>
 ```
 
+## Router Configuration
+
+The application uses Vue Router with memory history mode. This is set up in `routes/index.js`:
+
+```js
+import { createMemoryHistory, createRouter } from 'vue-router'
+import Home from "@/home/index.vue";
+
+const routes = [
+    { path: '/', component: Home },
+]
+
+const router = createRouter({
+    history: createMemoryHistory(),
+    routes,
+})
+
+export default router;
+```
+
+Memory history mode is useful for environments where you don't have access to the browser history API, such as in some server environments or embedded applications.
+
+## Root App Component
+
+The `App.vue` component serves as the application shell and contains the router view:
+
+```vue
+<script>
+// Component logic goes here
+</script>
+
+<template>
+  <router-view/>
+</template>
+```
+
+The `<router-view/>` is a special component that renders the matched component for the current route.
+
+## Application Entry Point
+
+The `main.js` file serves as the entry point for the application:
+
+```js
+import './style.css'
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from "@/routes/index.js";
+
+createApp(App)
+    .use(router)
+    .mount('#app')
+```
+
+
+
 ## Best Practices
 
 1. **Separate concerns** using composables for reusable logic
