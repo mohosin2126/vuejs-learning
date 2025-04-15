@@ -1,7 +1,7 @@
 <!-- NewComponent.vue -->
 <script setup>
 import { ref, computed, watch } from 'vue';
-
+import PracticeForm from"../form/index.vue"
 // Component state
 const title = ref('Practice');
 const items = ref([
@@ -96,5 +96,8 @@ watch(searchQuery, (newValue) => {
     <p v-else class="text-gray-500 text-center py-4">
       No items found. Add some items or try a different search.
     </p>
+
+    <PracticeForm/>
+
   </div>
 </template>

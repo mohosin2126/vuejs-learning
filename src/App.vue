@@ -9,7 +9,6 @@ import {
   computed,
   watch,
   provide,
-  inject,
   onBeforeMount,
   onMounted,
   onBeforeUpdate,
